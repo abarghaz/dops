@@ -3,25 +3,19 @@
   hosts: localhost
   tasks:
   - name: stop running container
-    command: docker stop toxreader/mypage
+    command: docker stop mypage-container
     ignore_errors: yes
 
   - name: remove stopped container
-    command: docker rm toxreader/mypage
+    command: docker rm mypage-container
     ignore_errors: yes
   
   - name: remove used image
-    command: docker rmi toxreader/mypage
+    command: docker rmi mypage-image
     ignore_errors: yes
     
   - name: build docker image from dockerfile
-    command: docker build -t toxreader/mypage .  
-
-  - name: create tag to image
-    command: docker tag toxreader/mypage toxreader/mypage
-
-  - name: push image to dockerhub
-    command: docker push toxreader/mypage 
+    command: docker build -t mypage-image .  
 
   - name: run container from image
-    command: docker run -d --name my-docker-container -p 8008:80 toxreader/mypage
+    command: docker run -d --name mypage-container -p 8008:80 mypage-image

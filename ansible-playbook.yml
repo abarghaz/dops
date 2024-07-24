@@ -15,7 +15,7 @@
     ignore_errors: yes
     
   - name: build docker image from dockerfile
-    command: docker build -t toxreader/mypage .  
+    command: docker build --platform linux/amd64 -t toxreader/mypage .  
 
   - name: create tag to image
     command: docker tag toxreader/mypage toxreader/mypage
